@@ -1,7 +1,6 @@
 package com.mathodcoast.telebot;
 
 import com.mathodcoast.telebot.mapper.MessageMapper;
-import com.mathodcoast.telebot.mapper.MessageMapperImpl;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;

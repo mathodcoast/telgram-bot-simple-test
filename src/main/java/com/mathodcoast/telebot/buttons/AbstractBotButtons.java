@@ -9,7 +9,7 @@ import java.util.List;
 
 public abstract class AbstractBotButtons {
 
-    protected ReplyKeyboardMarkup constructMenu(String[]... rows) {
+    ReplyKeyboardMarkup constructMenu(String[]... rows) {
         List<KeyboardRow> keyboard = new ArrayList<>();
 
         for (String[] row : rows) {
