@@ -1,32 +1,21 @@
 package com.mathodcoast.telebot;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class Bot extends TelegramLongPollingBot {
 
-    private BotCommands botCommands;
+private MessageProcessor messageProcessor;
 
-    public Bot(BotCommands botCommands) {
-        this.botCommands = botCommands;
+    public Bot(MessageProcessor messageProcessor) {
+        this.messageProcessor = messageProcessor;
     }
 
     @Override
     public void onUpdateReceived(Update update) {
-        String userMessage = update.getMessage().getText();
-        String chatId = update.getMessage().getChatId().toString();
-
-        sendMsg(chatId,userMessage);
-    }
-
-    private void sendMsg(String chatId,String userMessage) {
-        SendMessage sendMessage = botCommands.getSendMessageByCommand(userMessage, chatId);
-        sendMessage.enableMarkdown(true);
-
         try {
-            execute(sendMessage);
+            execute(messageProcessor.processUpdate(update));
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

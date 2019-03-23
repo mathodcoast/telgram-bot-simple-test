@@ -9,7 +9,7 @@ public class BotStarterApp {
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
 
-        Bot testBot = new Bot(BotCommands.valueOf());
+        Bot testBot = new Bot(new MessageProcessorImpl());
         try {
             telegramBotsApi.registerBot(testBot);
         } catch (TelegramApiRequestException e) {
