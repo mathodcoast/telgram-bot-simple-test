@@ -7,6 +7,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class Bot extends TelegramLongPollingBot {
 
 private MessageProcessor messageProcessor;
+private String botUsername;
+private String botToken;
 
     public Bot(MessageProcessor messageProcessor) {
         this.messageProcessor = messageProcessor;
@@ -23,11 +25,19 @@ private MessageProcessor messageProcessor;
 
     @Override
     public String getBotUsername() {
-        return "MathodcoastTestBot";
+        return botUsername;
     }
 
     @Override
     public String getBotToken() {
-        return "827569285:AAHR5pOpFvzHsX5u-HUMUNuz0Q86epmrvSg";
+        return botToken;
+    }
+
+    public void setBotUsername(String botUsername) {
+        this.botUsername = botUsername;
+    }
+
+    public void setBotToken(String botToken) {
+        this.botToken = botToken;
     }
 }

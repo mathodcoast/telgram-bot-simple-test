@@ -1,21 +1,26 @@
 package com.mathodcoast.telebot;
 
+import com.mathodcoast.telebot.mapper.MessageMapper;
+import com.mathodcoast.telebot.mapper.MessageMapperImpl;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+/**
+ *  This class process updates and invoke necessary 'sendMessage'.
+* */
+
 public class MessageProcessorImpl implements MessageProcessor {
 
-    private MessageMapper messageMapper = new MessageMapperImpl();
+    private MessageMapper messageMapper;
+
+    public MessageProcessorImpl(MessageMapper messageMapper) {
+        this.messageMapper = messageMapper;
+    }
 
     @Override
     public SendMessage processUpdate(Update update) {
-
-        String userFirstName = update.getMessage().getFrom().getFirstName();
         Message userMessageObj = update.getMessage();
-
-        System.out.println("\n>> User first name: " + userFirstName);
-
         return getSendMessageByCommand(userMessageObj).enableMarkdown(false);
     }
 

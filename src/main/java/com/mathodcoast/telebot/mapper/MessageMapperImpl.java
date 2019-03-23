@@ -1,15 +1,21 @@
-package com.mathodcoast.telebot;
+package com.mathodcoast.telebot.mapper;
 
+import com.mathodcoast.telebot.executor.TelegramBotExecutor;
+import com.mathodcoast.telebot.executor.TelegramBotExecutorImpl;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 
-import static com.mathodcoast.telebot.BotButtons.*;
+import static com.mathodcoast.telebot.buttons.BotButtons.*;
 
+/**
+ * Here we can connect buttons to their methods.
+ */
 public class MessageMapperImpl extends AbstractMessageMapper implements MessageMapper {
-    private TelegramBotExecutor executor = new TelegramBotExecutorImpl();
+    private TelegramBotExecutor executor;
 
-    public MessageMapperImpl() {
+    public MessageMapperImpl(TelegramBotExecutor executor) {
+        this.executor = executor;
         setupCommands();
     }
 
@@ -20,6 +26,7 @@ public class MessageMapperImpl extends AbstractMessageMapper implements MessageM
         getCommandHandlers().put(BYE_BUTTON,executor::bye);
         getCommandHandlers().put(HELP_BUTTON,executor::help);
         getCommandHandlers().put(WHAT_BUTTON,executor::what);
+        getCommandHandlers().put(OPEN_NEW_MENU,executor::openNewMenu);
 
         // Create command listener and data handler
         getCommandHandlers().put(SET_NAME_BUTTON,(messageObj) -> {

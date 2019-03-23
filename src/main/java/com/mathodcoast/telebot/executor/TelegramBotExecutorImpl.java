@@ -1,13 +1,20 @@
-package com.mathodcoast.telebot;
+package com.mathodcoast.telebot.executor;
 
+import com.mathodcoast.telebot.buttons.BotButtons;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class TelegramBotExecutorImpl extends TelegramBotExecutorAbstract implements TelegramBotExecutor{
+/**
+    Here we can create methods for buttons or data handling.
+    The methods return'SendMessage' object with response message and optional buttons menu.
+* */
 
-    private BotButtons botButtons = new BotButtons();
+public class TelegramBotExecutorImpl extends AbstractTelegramBotExecutor implements TelegramBotExecutor{
 
-    public TelegramBotExecutorImpl() {
+    private BotButtons botButtons;
+
+    public TelegramBotExecutorImpl(BotButtons botButtons) {
+        this.botButtons = botButtons;
     }
 
     @Override
@@ -19,7 +26,7 @@ public class TelegramBotExecutorImpl extends TelegramBotExecutorAbstract impleme
     @Override
     public SendMessage openNewMenu(Message messageObj){
         botLog(messageObj);
-        return createSendMessageWithNewKeyboard("This is new Menu!", botButtons.getKeyboards().get("main"));
+        return createSendMessageWithNewKeyboard("This is a new Menu!", botButtons.getKeyboards().get("next"));
     }
 
     @Override
